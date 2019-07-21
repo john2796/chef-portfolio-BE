@@ -27,5 +27,5 @@ exports.seed = function(knex, Promise) {
       item_ingredients: "Cut of Steak",
       user_id: 2
     }
-  ]);
-};
+  ])
+}

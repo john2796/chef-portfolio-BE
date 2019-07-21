@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs")
 
 exports.seed = function(knex, Promise) {
   return knex("users").insert([
@@ -32,5 +32,5 @@ exports.seed = function(knex, Promise) {
       email: "222@222.com",
       location: "Colonie, NY"
     }
-  ]);
-};
+  ])
+}
