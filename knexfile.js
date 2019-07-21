@@ -1,12 +1,3 @@
-const localPg = {
-  host: "localhost",
-  database: "auth",
-  user: "test",
-  password: "hired"
-}
-// replace
-const productionDbConnection = process.env.DATABASE_URL || localPg
-
 module.exports = {
   development: {
     client: "sqlite3",
@@ -42,7 +33,8 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: productionDbConnection,
+    connection:
+      "postgres://pqgxyuihkynwnz:4ed76b92ad3b9ec6ca04032728088d09157874e999ae3de765d6eced5230b162@ec2-54-221-215-228.compute-1.amazonaws.com:5432/dfovka022elf0r",
     migrations: {
       directory: "./data/migrations"
     },
@@ -51,3 +43,49 @@ module.exports = {
     }
   }
 }
+
+// exports.up = function(knex) {
+//   return knex.schema.createTable("users", table => {
+//     table.increments();
+
+//     table
+//       .string("username", 128)
+//       .notNullable()
+//       .unique();
+
+//     table.string("password").notNullable();
+
+//     table.string("email", 128).notNullable();
+
+//     table.string("location", 128).notNullable();
+//   });
+// };
+
+// exports.down = function(knex, Promise) {
+//   return knex.schema.dropTableIfExists("users");
+// };
+
+// exports.up = function(knex) {
+//   return knex.schema.createTable("posts", posts => {
+//     posts.increments();
+
+//     posts.string("chef_name", 255);
+//     posts.string("recipe_title", 255);
+//     posts.string("item_photo", 255);
+//     posts.string("chef_location", 255);
+//     posts.string("item_ingredients", 255);
+
+//     posts
+//       .integer("user_id")
+//       .unsigned()
+//       .notNullable()
+//       .references("id")
+//       .inTable("users")
+//       .onDelete("CASCADE")
+//       .onUpdate("CASCADE");
+//   });
+// };
+
+// exports.down = function(knex) {
+//   return knex.schema.dropTableIfExists("posts");
+// };
