@@ -1,12 +1,11 @@
 const localPg = {
-  host: 'localhost',
-  database: 'auth',
-  user: 'test',
-  password: 'hired',
+  host: "localhost",
+  database: "auth",
+  user: "test",
+  password: "hired"
 }
-
+// replace
 const productionDbConnection = process.env.DATABASE_URL || localPg
-
 
 module.exports = {
   development: {
@@ -17,7 +16,7 @@ module.exports = {
     },
     pool: {
       afterCreate: (conn, done) => {
-        conn.run("PRAGMA foreign_keys = ON", done);
+        conn.run("PRAGMA foreign_keys = ON", done)
       }
     },
     migrations: {
@@ -42,13 +41,13 @@ module.exports = {
   },
 
   production: {
-    client: 'pg',
+    client: "pg",
     connection: productionDbConnection,
     migrations: {
-      directory: './data/migrations',
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: './data/seeds',
-    },
-  },
-};
+      directory: "./data/seeds"
+    }
+  }
+}

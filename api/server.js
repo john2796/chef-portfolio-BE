@@ -8,8 +8,6 @@ const postsRouter = require("../routes/posts-router.js");
 const server = express();
 
 
-
-
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
