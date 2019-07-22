@@ -1,66 +1,52 @@
 # chef-portfolio-BE
 
-The post will have this basic format:
+##### Backend URL : https://chef-portfolio-webtp6.herokuapp.com/
 
-```{
-      chef_name: "Erica",
-      recipe_title: "Pizza",
-      item_photo:
-        "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-      chef_location: "Boston, Massachusetts",
-      item_ingredients: "Pizza Dough, Pizza Sauce, Cheese, Basil",
-      user_id: 2
-    },
-    {
-      chef_name: "Mitsuki",
-      recipe_title: "Soup",
-      item_photo:
-        "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-      chef_location: "Austin, TX",
-      item_ingredients: "Water, Tomatoes, Cream, Basil",
-      user_id: 2
-    },
-    {
-      chef_name: "Sam",
-      recipe_title: "Steak",
-      item_photo:
-        "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-      chef_location: "Colonie, NY",
-      item_ingredients: "Cut of Steak",
-      user_id: 2
-    }
+
+
+## Table of Contents
+ - [Summary Table of API Endpoints](#summary-table-of-api-endpoints)
+   - [Register-user](#register-user)
+   - [Offers](#offers)
+   - [Ads](#ads)
+   - [Analytics](#analytics)
+   - [Checkout Payments](#checkout-payments)
+   - [Agreements](#agreements)
+   
+
+
+
+### Summary Table of API Endpoints
+| Type | Endpoints          | Description   |
+| ---- | ------------------ | ------------- |
+| POST | /api/auth/register | Register User |
+
+
+#### Register and Login Options
+![](assets/loginoptions.png)
+
+
+
+#### Register-user
+
+`GET, PUT, DELETE 200 success ✅ Private`
 ```
-
-https://chef-portfolio-bw.herokuapp.com/api/auth/register
-
-- Post will register a new user and Will provide an JSON web token
-
-- <strong>Required</strong>: username, password, and location
-
-https://chef-portfolio-bw.herokuapp.com/api/auth/login
-
-- Post request will login a registered user and will provide the JSON web Token.
-
-- <strong>Required</strong>: username and password
-
-https://chef-portfolio-bw.herokuapp.com/api/posts/:id
-
-- a GET request to return the post with the specific ID.
-
-https://chef-portfolio-bw.herokuapp.com/api/posts
-
-- a Post request that will let the logged in user create a new chef post
-- <strong>Required</strong>: chef_name
-
-https://chef-portfolio-bw.herokuapp.com/api/posts/
-
-- a PUT request to edit the post that the user created
-- <strong>Required</strong>: User needs to be logged in
-
-https://chef-portfolio-bw.herokuapp.com/api/posts/:id
-
-- a delete request to this route will delete the post id of that route for a logged in user. 
-
-
-
-
+{
+    "id": 4,
+    "name": "John Benedict Miranda",
+    "email": "jbmiranda22796@gmail.com",
+    "image_url": "https://media.licdn.com/dms/image/C4E03AQHWn1xyl8YaSA/profile-displayphoto-shrink_100_100/0?e=1560384000&v=beta&t=rSgo6M7-lDWtq772krO-EBB8gskFCGRlecEbVqQEJDU",
+    "nickname": "jbmiranda22796",
+    "sub": "linkedin|5gWW_xGV9g",
+    "acct_type": "affiliate",
+    "phone": null,
+    "amount": 0,
+    "show_tour": true,
+    "stripe_cust_id": null,
+    "stripe_payout_id": null,
+    "stripe_balance": 0,
+    "offers": 0,
+    "ads": 0,
+    "agreements": 1
+}
+```
