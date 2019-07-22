@@ -111,13 +111,15 @@
 
 ### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts/all
 
-- This will returl all the posts
+- You will need to make a `GET` request to this endpoint
+- This will return all the posts
 - @Access Public , you don't need to Log in for this endpoint
 
 ### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts
 
 - User must be Logged In
 - Headers Authorization required
+- You will need to make a `GET` request to this endpoint
 
 ```
 [
@@ -136,7 +138,8 @@
 
 ### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts/5
 
-- `GET` Posts by id
+- You will need to make a `GET` request to this endpoint
+- fetch Posts by id
 - Add Posts Id on the end of the URL just like the endpoint above
 
 ```
@@ -170,3 +173,7 @@
 }
 
 ```
+
+#### Documented by:
+
+- John Miranda : Team-Lead / Project-Manager --> you can dm me directly if you have any question `Happy Coding🧙‍♂️‍♂️‍♂️`
