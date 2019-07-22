@@ -27,20 +27,18 @@ router.get("/all", (req, res) => {
     })
 })
 
-router.get("/:id", restricted, (req, res) => {
+router.get("/:id", (req, res) => {
   const { id } = req.params
 
   db("posts")
     .returning("id")
-    .where({ id, user_id: req.decodedToken.subject })
+    .where({ id })
     .first()
     .then(post => {
       if (post) {
         res.status(200).json(post)
       } else {
-        res
-          .status(404)
-          .json({ error: "You cannot access the post with this specific id." })
+        res.status(404).json({ error: "Not Found" })
       }
     })
     .catch(({ message }) => {
@@ -101,7 +99,7 @@ router.delete("/:id", restricted, (req, res) => {
     .returning("id")
     .then(count => {
       if (count > 0) {
-        res.status(200).json(count)
+        res.status(200).json({ message: "successfully deleted" })
       } else {
         res
           .status(404)
