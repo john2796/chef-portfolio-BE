@@ -20,10 +20,6 @@
 | POST | /api/auth/login    | Login user    |
 
 
-#### Register and Login Options
-![](assets/loginoptions.png)
-
-
 
 #### Register-user
 
