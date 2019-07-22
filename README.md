@@ -109,9 +109,15 @@
 
 ## Posts
 
+### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts/all
+
+- This will returl all the posts
+- @Access Public , you don't need to Log in for this endpoint
+
 ### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts
 
-#### @description be aware you this is a private route once hit this api/endpoint it return you this data below for successfull response, if you don't get this carefully read the error response or status code
+- User must be Logged In
+- Headers Authorization required
 
 ```
 [
@@ -130,7 +136,8 @@
 
 ### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts/5
 
-#### @description Getting Posts by id, you just need to add posts id onto the URL , upon success response you will get this data
+- `GET` Posts by id
+- Add Posts Id on the end of the URL just like the endpoint above
 
 ```
 {
@@ -147,7 +154,10 @@
 
 ### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts/
 
-#### @description Creating new post you will need to make a `POST` request with these payload example
+- Creating new post
+- You will need to make a `POST` request to this endpoint
+- Payload example below
+- Headers Authorization required
 
 ```
 {
