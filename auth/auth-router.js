@@ -23,10 +23,12 @@ router.post("/register", async (req, res) => {
   try {
     user.password = await bcrypt.hash(user.password, 1)
 
-    const user_id = await db
+    const [user_id] = await db
       .insert(user)
       .into("users")
       .returning("id")
+
+    console.log(user_id)
     const payload = await db
       .select()
       .from("users")
