@@ -15,15 +15,16 @@
 
 
 ### Summary Table of API Endpoints
-| Type | Endpoints          | Description                                      | Access  |
-| ---- | ------------------ | ------------------------------------------------ | ------- |
-| POST | /api/auth/register | Register User                                    | Public  |
-| POST | /api/auth/login    | Login user                                       | Public  |
-| GET  | /api/posts/all     | Get all posts                                    | Public  |
-| GET  | /api/posts/        | Get all posts for that has the same id with user | Private |
-| GET  | /api/posts/:id     | Get posts by id                                  | Public  |
-| POST | /api/posts         | Creating new Post                                | Private |
-| PUT  | /api/posts/:id     | Update Post                                      | Private |
+| Type   | Endpoints          | Description                                      | Access  |
+| ------ | ------------------ | ------------------------------------------------ | ------- |
+| POST   | /api/auth/register | Register User                                    | Public  |
+| POST   | /api/auth/login    | Login user                                       | Public  |
+| GET    | /api/posts/all     | Get all posts                                    | Public  |
+| GET    | /api/posts/        | Get all posts for that has the same id with user | Private |
+| GET    | /api/posts/:id     | Get posts by id                                  | Public  |
+| POST   | /api/posts         | Creating new Post                                | Private |
+| PUT    | /api/posts/:id     | Update Post                                      | Private |
+| DELETE | /api/posts/:id     | DELETE Post                                      | Private |
 
 
 

@@ -74,4 +74,15 @@ router.post("/login", async (req, res) => {
   }
 })
 
+
+router.get('/test', async(req, res) => {
+  try {
+    const allUser = await db.select().from('users')
+    const allPosts = await db.select().from('posts')
+    res.status(200).json({allUser, allPosts})
+  } catch ({error}) {
+    res.status(500).json({message})
+  }
+})
+
 module.exports = router
