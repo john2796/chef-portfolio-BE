@@ -31,23 +31,6 @@ router.post("/register", async (req, res) => {
   } catch ({ message }) {
     res.status(500).json({ message })
   }
-
-  db("users")
-    .insert(user)
-    .then(ids => {
-      const id = ids[0]
-
-      db("users")
-        .where({ id })
-        .first()
-        .then(user => {
-          const token = tokens.generateToken(user)
-          res.status(201).json({ id: user.id, username: user.username, token })
-        })
-    })
-    .catch(({ message }) => {
-      res.status(500).json({ message })
-    })
 })
 
 router.post("/login", (req, res) => {
