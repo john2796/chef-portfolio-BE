@@ -7,11 +7,8 @@
 ## Table of Contents
  - [Summary Table of API Endpoints](#summary-table-of-api-endpoints)
    - [Register-user](#register-user)
-   - [Offers](#offers)
-   - [Ads](#ads)
-   - [Analytics](#analytics)
-   - [Checkout Payments](#checkout-payments)
-   - [Agreements](#agreements)
+   - [Login-user](#register-user)
+   
    
 
 
@@ -20,6 +17,7 @@
 | Type | Endpoints          | Description   |
 | ---- | ------------------ | ------------- |
 | POST | /api/auth/register | Register User |
+| POST | /api/auth/login    | Login user    |
 
 
 #### Register and Login Options
@@ -29,24 +27,69 @@
 
 #### Register-user
 
-`GET, PUT, DELETE 200 success ✅ Private`
+`Register example`
+`Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/auth/register`
 ```
 {
-    "id": 4,
-    "name": "John Benedict Miranda",
-    "email": "jbmiranda22796@gmail.com",
-    "image_url": "https://media.licdn.com/dms/image/C4E03AQHWn1xyl8YaSA/profile-displayphoto-shrink_100_100/0?e=1560384000&v=beta&t=rSgo6M7-lDWtq772krO-EBB8gskFCGRlecEbVqQEJDU",
-    "nickname": "jbmiranda22796",
-    "sub": "linkedin|5gWW_xGV9g",
-    "acct_type": "affiliate",
-    "phone": null,
-    "amount": 0,
-    "show_tour": true,
-    "stripe_cust_id": null,
-    "stripe_payout_id": null,
-    "stripe_balance": 0,
-    "offers": 0,
-    "ads": 0,
-    "agreements": 1
+    "username": "john27", <-unique,required->
+    "email": "john@yahoo.com", <-required->
+    "password": "miranda", <-required->
+    "location": "San Diego" <-required->
+}
+
+```
+`Register user: 201 response ✅`
+```
+ {
+    "id": 12,
+    "username": "john miranda",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxMiwidXNlcm5hbWUiOiJqb2huIG1pcmFuZGEiLCJpYXQiOjE1NjM3NzA5MjgsImV4cCI6MTU2Mzg1NzMyOH0.6NS1ABm8VY0iu0ltLPjpGNlIxWQWaU3-YLnA0ll9XQU"
+
+}
+```
+
+`Register user: 400 Bad Request ❗️`
+```
+{
+    "message": "Username field is required"
+}
+```
+`Register user: 500 Internal Server Errror ❗️`
+```
+{
+    "message": "insert into `users` (`email`, `location`, `password`, `username`) values ('john@yahoo.com', 'San Diego', 'miranda', 'john27') - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.username"
+}
+```
+
+
+
+#### Login-user
+`Login example`
+`Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/auth/login`
+```
+{
+    "username": "john miranda12",
+    "password": "password"
+}
+
+```
+`Login user: 200 response ✅`
+```
+{
+    "message": "john miranda12 is logged in.",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxNCwidXNlcm5hbWUiOiJqb2huIG1pcmFuZGExMiIsImlhdCI6MTU2Mzc3MTM2MiwiZXhwIjoxNTYzODU3NzYyfQ.Vp1_TX_iBL9YPQ0kEPa8dzdQFcdXg8snDfbYND9RF8k"
+}
+```
+
+`Login user: 400 Bad Request ❗️`
+```
+{
+    "message": "Username field is required"
+}
+```
+`Login user: 401 Internal Server Errror ❗️`
+```
+{
+    "message": "Invalid credentials, Unauthorized"
 }
 ```

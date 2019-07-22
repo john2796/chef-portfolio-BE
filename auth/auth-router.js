@@ -6,7 +6,7 @@ const tokens = require("./token.js")
 const db = require("../data/dbConfig")
 
 router.post("/register", async (req, res) => {
-  const user = req.body
+  let user = req.body
 
   if (!user.username) {
     return res.status(400).json({ message: "Username field is required" })
@@ -21,45 +21,52 @@ router.post("/register", async (req, res) => {
     return res.status(400).json({ message: "Location field is required" })
   }
   try {
-    password = await bcrypt.hashSync(user.password, 14)
-    const user_id = await db.insert(user).into("users")
-    const user = await db("users")
+    user.password = await bcrypt.hash(user.password, 1)
+
+    const [user_id] = await db.insert(user).into("users")
+    const payload = await db
+      .select()
+      .from("users")
       .where({ id: user_id })
       .first()
-    const token = await tokens.generateToken(user)
-    res.status(201).json({ id: user.id, username: user.username, token })
+
+    const token = await tokens.generateToken(payload)
+    res.status(201).json({ id: payload.id, username: payload.username, token })
   } catch ({ message }) {
     res.status(500).json({ message })
   }
 })
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   let { username, password } = req.body
   if (!username) {
-    return res.status(400).json({ message: "Location field is required" })
+    return res.status(400).json({ message: "Username field is required" })
   }
   if (!password) {
-    return res.status(400).json({ message: "Location field is required" })
+    return res.status(400).json({ message: "Password field is required" })
   }
+  try {
+    const user = await db
+      .select()
+      .from("users")
+      .where({ username })
+      .first()
 
-  db("users")
-    .where({ username })
-    .first()
-    .then(user => {
-      if (user && bcrypt.compareSync(password, user.password)) {
-        const token = tokens.generateToken(user)
-        res
+    if (user) {
+      const correct = await bcrypt.compare(password, user.password)
+      // console.log(user.password, password, correct, user)
+      if (correct) {
+        const token = await tokens.generateToken(user)
+        return res
           .status(200)
           .json({ message: `${user.username} is logged in.`, token })
-      } else {
-        res.status(401).json({
-          error: "Please provide the correct username and password."
-        })
       }
-    })
-    .catch(({ message }) => {
-      res.status(500).json({ message })
-    })
+    }
+
+    res.status(401).json({ message: "Invalid credentials, Unauthorized" })
+  } catch ({ message }) {
+    res.status(500).json({ message })
+  }
 })
 
 module.exports = router
