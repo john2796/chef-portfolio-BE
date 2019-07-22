@@ -2,19 +2,16 @@
 
 ##### Backend URL : https://chef-portfolio-webtp6.herokuapp.com/
 
-
-
 ## Table of Contents
- - [Summary Table of API Endpoints](#summary-table-of-api-endpoints)
-   - [Register-user](#register-user)
-   - [Login-user](#register-user)
-   - [Post](#post)
-   
-   
 
+- [Summary Table of API Endpoints](#summary-table-of-api-endpoints)
 
+  - [Register-user](#register-user)
+  - [Login-user](#register-user)
+  - [Posts](#posts)
 
 ### Summary Table of API Endpoints
+
 | Type   | Endpoints          | Description                                      | Access  |
 | ------ | ------------------ | ------------------------------------------------ | ------- |
 | POST   | /api/auth/register | Register User                                    | Public  |
@@ -26,49 +23,57 @@
 | PUT    | /api/posts/:id     | Update Post                                      | Private |
 | DELETE | /api/posts/:id     | DELETE Post                                      | Private |
 
+### If Access is Private you need to pass token as header (Authorization...)
 
-
-#### Register-user
+## Register-user
 
 `Register example`
-`Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/auth/register`
+
+### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/auth/register
+
 ```
 {
-    "username": "john27", <-unique,required->
-    "email": "john@yahoo.com", <-required->
-    "password": "miranda", <-required->
-    "location": "San Diego" <-required->
+    "username": "john27",            has to be unique,required
+    "email": "john@yahoo.com",                        required
+    "password": "miranda",                            required
+    "location": "San Diego"                           required
 }
 
 ```
-`Register user: 201 response ✅`
+
+#### Register user: 201 response ✅
+
 ```
  {
-    "id": 12,
+    "id": 1,
     "username": "john miranda",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxMiwidXNlcm5hbWUiOiJqb2huIG1pcmFuZGEiLCJpYXQiOjE1NjM3NzA5MjgsImV4cCI6MTU2Mzg1NzMyOH0.6NS1ABm8VY0iu0ltLPjpGNlIxWQWaU3-YLnA0ll9XQU"
 
 }
 ```
 
-`Register user: 400 Bad Request ❗️`
+#### Register user: 400 Bad Request ❗️
+
 ```
 {
     "message": "Username field is required"
 }
 ```
-`Register user: 500 Internal Server Errror ❗️`
+
+#### Register user: 500 Internal Server Errror ❗️
+
 ```
 {
     "message": "insert into `users` (`email`, `location`, `password`, `username`) values ('john@yahoo.com', 'San Diego', 'miranda', 'john27') - SQLITE_CONSTRAINT: UNIQUE constraint failed: users.username"
 }
 ```
 
+## Login-user
 
+### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/auth/login
 
-#### Login-user
 `Login example`
-`Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/auth/login`
+
 ```
 {
     "username": "john miranda12",
@@ -76,7 +81,9 @@
 }
 
 ```
-`Login user: 200 response ✅`
+
+#### Login user: 200 response ✅
+
 ```
 {
     "message": "john miranda12 is logged in.",
@@ -84,25 +91,28 @@
 }
 ```
 
-`Login user: 400 Bad Request ❗️`
+#### Login user: 400 Bad Request ❗️
+
 ```
 {
     "message": "Username field is required"
 }
 ```
-`Login user: 401 Internal Server Errror ❗️`
+
+#### Login user: 401 Internal Server Errror ❗️
+
 ```
 {
     "message": "Invalid credentials, Unauthorized"
 }
 ```
 
+## Posts
 
+### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts
 
+#### @description be aware you this is a private route once hit this api/endpoint it return you this data below for successfull response, if you don't get this carefully read the error response or status code
 
-#### Posts
-`GET https://chef-portfolio-webtp6.herokuapp.com/api/posts ✅`
-`sample data when getting post`
 ```
 [
     {
@@ -117,8 +127,11 @@
 ]
 
 ```
-`GET https://chef-portfolio-webtp6.herokuapp.com/api/posts/5 ✅`
-`- Getting Posts by id`
+
+### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts/5
+
+#### @description Getting Posts by id, you just need to add posts id onto the URL , upon success response you will get this data
+
 ```
 {
     "id": 5,
@@ -132,8 +145,10 @@
 
 ```
 
-`- Creating new Post`
-- this is a sample object of what you need when posting
+### Endpoint: https://chef-portfolio-webtp6.herokuapp.com/api/posts/
+
+#### @description Creating new post you will need to make a `POST` request with these payload example
+
 ```
 {
     "chef_name": "Mitsuki",
