@@ -7,7 +7,7 @@
 - [Summary Table of API Endpoints](#summary-table-of-api-endpoints)
 
   - [Register-user](#register-user)
-  - [Login-user](#register-user)
+  - [Login-user](#login-user)
   - [Posts](#posts)
 
 ### Summary Table of API Endpoints
