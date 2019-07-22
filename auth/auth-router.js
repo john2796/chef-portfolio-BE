@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs")
 const tokens = require("./token.js")
 const db = require("../data/dbConfig")
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   const user = req.body
 
   if (!user.username) {
@@ -20,9 +20,18 @@ router.post("/register", (req, res) => {
   if (!user.location) {
     return res.status(400).json({ message: "Location field is required" })
   }
+  try {
+    password = await bcrypt.hashSync(user.password, 14)
+    const user_id = await db.insert(user).into("users")
+    const user = await db("users")
+      .where({ id: user_id })
+      .first()
+    const token = await tokens.generateToken(user)
+    res.status(201).json({ id: user.id, username: user.username, token })
+  } catch ({ message }) {
+    res.status(500).json({ message })
+  }
 
-  const hash = bcrypt.hashSync(user.password, 14)
-  user.password = hash
   db("users")
     .insert(user)
     .then(ids => {
